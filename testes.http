@@ -1,0 +1,56 @@
+@base = http://127.0.0.1:5000
+
+### 1. Criar usuário (esperado 201)
+POST {{base}}/usuarios
+Content-Type: application/json
+
+{"nome": "Paulo", "email": "paulo@email.com"}
+
+### 2. Criar rotina (esperado 201)
+POST {{base}}/rotinas
+Content-Type: application/json
+
+{"usuario_id": 1, "nome": "Estudar Python"}
+
+### 3. Registrar execução de hoje (esperado 201)
+POST {{base}}/rotinas/1/execucoes
+Content-Type: application/json
+
+{}
+
+### 4. Repetir no mesmo dia (esperado 409 - regra do dia único)
+POST {{base}}/rotinas/1/execucoes
+Content-Type: application/json
+
+{}
+### 4b. Reativar a rotina (esperado 200)
+PATCH {{base}}/rotinas/1/status
+Content-Type: application/json
+
+{"ativa": true}
+### 5. Desativar a rotina (esperado 200)
+PATCH {{base}}/rotinas/1/status
+Content-Type: application/json
+
+{"ativa": false}
+
+### 6. Executar rotina inativa (esperado 409 - regra da rotina inativa)
+POST {{base}}/rotinas/1/execucoes
+Content-Type: application/json
+
+{}
+
+### 7. Ver o histórico (esperado 200)
+GET {{base}}/logs
+
+### 8. Atualizar usuário (esperado 200)
+PUT {{base}}/usuarios/1
+Content-Type: application/json
+
+{"nome": "Paulo Victor"}
+
+### 9. Listar rotinas (esperado 200)
+GET {{base}}/rotinas
+
+### 10. Remover execução (esperado 204)
+DELETE {{base}}/execucoes/1

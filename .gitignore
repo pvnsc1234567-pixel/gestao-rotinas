@@ -1,0 +1,23 @@
+# Ambiente virtual
+venv/
+.venv/
+env/
+
+# Variáveis de ambiente (dados sensíveis)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Banco de dados local
+instance/
+*.db
+*.sqlite3
+
+# Editores / SO
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
